@@ -42,6 +42,7 @@
 						</form>
 					</div>
 					<div class="panel-footer ">
+						<div *ngIf="isLoginError" class="alert alert-danger">Incorret username or password</div>
 						Don't have an account! <a href="/register" onClick=""> Sign Up Here </a>
 					</div>
                 </div>

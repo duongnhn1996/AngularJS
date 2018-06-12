@@ -17,7 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  readonly ROOT_URL = "http://localhost:3000/user"
+  readonly ROOT_URL = "http://localhost:52044/api"
   Users: Observable<any>;
   constructor(private http: HttpClient) { }
   createUser(Username: string, Password: string) {
@@ -28,6 +28,11 @@ export class UserService {
     }
 
     return this.http.post<any>(this.ROOT_URL, data);
+  }
+  userAuthentication(userName,password){
+    
+    var reqheader = new HttpHeaders({"Content-Type":"application/x-www-urlencoded",'Authorization':  'Basic ' +userName + ":" + password});
+    return this.http.post(this.ROOT_URL+"/auth/token",{headers: reqheader});
   }
   checkUser(user: string, pass: string): Observable<any> {
     
