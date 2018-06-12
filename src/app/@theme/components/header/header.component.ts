@@ -1,8 +1,12 @@
+import { Router } from '@angular/router';
+
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
+
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
+import { UserService } from '../../../@core/data/users.service';
+
 
 @Component({
   selector: 'ngx-header',
@@ -16,14 +20,19 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  // userMenu = [{ title: 'Profile' },  {title: 'Profile'} ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService,
+              private router: Router
+            ) {
   }
-
+  private LogOut(){
+      localStorage.removeItem('userToken'); // remove token
+      this.router.navigate(['/login']);
+    }
   ngOnInit() {
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.nick);

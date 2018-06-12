@@ -6,7 +6,7 @@ import 'rxjs/add/operator/filter';
 import { ListMail } from './@core/data/listmail';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap, filter } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NbResetPasswordComponent } from '@nebular/auth';
 import { URLSearchParams } from '@angular/http';
 const httpOptions = {
@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsersService {
   readonly ROOT_URL = "http://localhost:52044/api"
   Users: Observable<any>;
   constructor(private http: HttpClient) { }
@@ -30,29 +30,37 @@ export class UserService {
     return this.http.post<any>(this.ROOT_URL, data);
   }
   userAuthentication(userName,password){
-    
-    var reqheader = new HttpHeaders({"Content-Type":"application/x-www-urlencoded",'Authorization':  'Basic ' +userName + ":" + password});
-    return this.http.post(this.ROOT_URL+"/auth/token",{headers: reqheader});
+    const myheader = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      "Authorization": "Basic " + btoa(userName + ":" + password)
+    });
+
+    let body: HttpParams = new HttpParams(); // require
+
+    return this.http.post(this.ROOT_URL+"/auth/token",body,{headers: myheader});
   }
-  checkUser(user: string, pass: string): Observable<any> {
+  getUserInfo(){
+    return "nothing";
+  }
+  // checkUser(user: string, pass: string): Observable<any> {
     
 
-    // return this.http.post<any>(this.ROOT_URL,{ username: user, password: pass }).pipe(
-    //   tap(value => value),
-    //   catchError(error => of([])
-    //   )
-    // );
+  //   // return this.http.post<any>(this.ROOT_URL,{ username: user, password: pass }).pipe(
+  //   //   tap(value => value),
+  //   //   catchError(error => of([])
+  //   //   )
+  //   // );
     
-    let header = new HttpHeaders();
-    header.append("Authorization", "Basic " + btoa(user + ":" + pass)); 
-    header.append("Content-Type", "application/x-www-form-urlencoded");
-    return this.http.get(this.ROOT_URL,{headers:header});
-    // .pipe(
-    //     tap(value => value),
-    //     catchError(error => of([])
-    //     )
-    //   );
+  //   let header = new HttpHeaders();
+  //   header.append("Authorization", "Basic " + btoa(user + ":" + pass)); 
+  //   header.append("Content-Type", "application/x-www-form-urlencoded");
+  //   return this.http.get(this.ROOT_URL,{headers:header});
+  //   // .pipe(
+  //   //     tap(value => value),
+  //   //     catchError(error => of([])
+  //   //     )
+  //   //   );
 
-  }
+  // }
 
 }

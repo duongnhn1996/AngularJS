@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './../../user.service';
+import { UsersService } from './../../user.service';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
@@ -10,7 +10,7 @@ import { UserService } from './../../user.service';
 export class RegisterComponent implements OnInit {
  
   Users: Observable<any>;
-  constructor(private userService: UserService,private router:Router) { }
+  constructor(private userService: UsersService,private router:Router) { }
   register(username:string,password:string){
     this.userService.createUser(username,password).subscribe(value => {
        this.Users = value; 

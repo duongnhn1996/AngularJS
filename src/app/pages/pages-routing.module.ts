@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthRoleGuard } from '../auth-role/auth-role.guard';
 
 const routes: Routes = [{
   path: '',
-  component: PagesComponent,
+  component: PagesComponent,canActivate:[AuthRoleGuard],
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
