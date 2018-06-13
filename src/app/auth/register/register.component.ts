@@ -13,14 +13,14 @@ export class RegisterComponent implements OnInit {
  
   Users: Observable<any>;
   constructor(private userService: UsersService,private router:Router) { }
-  register(username:string,password:string){
-    this.userService.createUser(username,password).subscribe(value => {
-       this.Users = value; 
-       alert("Register Done!");
-       this.router.navigate(['/login']); // change route
+  // register(username:string,password:string){
+  //   this.userService.createUser(username,password).subscribe(value => {
+  //      this.Users = value; 
+  //      alert("Register Done!");
+  //      this.router.navigate(['/login']); // change route
       
-      });
-  }
+  //     });
+  // }
   ngOnInit() {
   }
   

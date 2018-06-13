@@ -1,4 +1,3 @@
-import { ListUser } from './@core/data/listuser';
 import { of } from 'rxjs/observable/of';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,15 +19,15 @@ export class UsersService {
   readonly ROOT_URL = "http://localhost:52044/api"
   Users: Observable<any>;
   constructor(private http: HttpClient) { }
-  createUser(Username: string, Password: string) {
-    const data: ListUser = {
-      id: null,
-      username: Username,
-      password: Password
-    }
+  // createUser(Username: string, Password: string) {
+  //   const data: IListUser = {
+  //     id: null,
+  //     username: Username,
+  //     password: Password
+  //   }
 
-    return this.http.post<any>(this.ROOT_URL, data);
-  }
+  //   return this.http.post<any>(this.ROOT_URL, data);
+  // }
   userAuthentication(userName,password){
     const myheader = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
