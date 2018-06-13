@@ -39,28 +39,13 @@ export class UsersService {
 
     return this.http.post(this.ROOT_URL+"/auth/token",body,{headers: myheader});
   }
+
   getUserInfo(){
-    return "nothing";
+   return this.http.get(this.ROOT_URL+"/getUserInfo",{
+      headers: new HttpHeaders({
+        'Authorization':'Bearer '+ localStorage.getItem('userToken')
+      })
+    });
   }
-  // checkUser(user: string, pass: string): Observable<any> {
-    
-
-  //   // return this.http.post<any>(this.ROOT_URL,{ username: user, password: pass }).pipe(
-  //   //   tap(value => value),
-  //   //   catchError(error => of([])
-  //   //   )
-  //   // );
-    
-  //   let header = new HttpHeaders();
-  //   header.append("Authorization", "Basic " + btoa(user + ":" + pass)); 
-  //   header.append("Content-Type", "application/x-www-form-urlencoded");
-  //   return this.http.get(this.ROOT_URL,{headers:header});
-  //   // .pipe(
-  //   //     tap(value => value),
-  //   //     catchError(error => of([])
-  //   //     )
-  //   //   );
-
-  // }
 
 }

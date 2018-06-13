@@ -14,7 +14,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthRoleGuard } from './auth-role/auth-role.guard';
 
 const routes: Routes = [
-  { path: 'page', component:AuthComponent },
+  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule',canActivate:[AuthRoleGuard] },
   // { path: 'login', component: AuthComponent },
   // {,canActivate:[AuthRoleGuard]
   //   path: 'auth',
@@ -67,7 +67,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // default
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // default
   { path: '**', redirectTo: 'login' },
 
   

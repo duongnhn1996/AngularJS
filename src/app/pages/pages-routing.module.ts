@@ -7,7 +7,7 @@ import { AuthRoleGuard } from '../auth-role/auth-role.guard';
 
 const routes: Routes = [{
   path: '',
-  component: PagesComponent,canActivate:[AuthRoleGuard],
+  component: PagesComponent,
   children: [{
     path: 'dashboard',
     component: DashboardComponent,

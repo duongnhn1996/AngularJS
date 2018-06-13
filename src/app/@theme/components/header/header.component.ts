@@ -1,3 +1,4 @@
+import { UsersService } from './../../../user.service';
 import { Router } from '@angular/router';
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -15,7 +16,7 @@ import { UserService } from '../../../@core/data/users.service';
 })
 export class HeaderComponent implements OnInit {
 
-
+  userInfo:any
   @Input() position = 'normal';
 
   user: any;
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
               private menuService: NbMenuService,
               private userService: UserService,
               private analyticsService: AnalyticsService,
-              private router: Router
+              private router: Router,
+              private usersService: UsersService
             ) {
   }
   private LogOut(){
@@ -34,8 +36,11 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    // this.userService.getUsers()
+    //   .subscribe((users: any) => this.user = users.nick);
+    this.usersService.getUserInfo().subscribe((data: any)=>{
+      this.userInfo=data;
+    })
   }
 
   toggleSidebar(): boolean {
