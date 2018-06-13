@@ -8,6 +8,7 @@ import { catchError, map, tap, filter } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NbResetPasswordComponent } from '@nebular/auth';
 import { URLSearchParams } from '@angular/http';
+import { IListUser } from './@core/data/listuser';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -45,6 +46,20 @@ export class UsersService {
         'Authorization':'Bearer '+ localStorage.getItem('userToken')
       })
     });
+  }
+
+  registerUser(username,password,email,fullname){
+    const myheader = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const body= {
+  
+      'username': username,
+      'password': password,
+      'fullname': fullname,
+      'email': email
+    }
+    return this.http.post(this.ROOT_URL + "/user", body, {headers:myheader});
   }
 
 }
