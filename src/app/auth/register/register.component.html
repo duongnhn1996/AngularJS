@@ -38,14 +38,14 @@
 										<!-- CONFIRM PASSWORD -->
 										<div class="form-group">
 											<div class="input-group">
-												<input class="form-control" required  pattern="password" ngModel #repassword="ngModel" name="repassword" id="repassword"   placeholder="Re-Password"  type="password" >
+												<input class="form-control" required  ngModel #repassword="ngModel" name="repassword" id="repassword"   placeholder="Re-Password"  type="password" >
 											</div>
                     					</div>
-										<div class="alert alert-danger" *ngIf="repassword.touched&&repassword.value!=password.value">Password not match</div>
+										<div class="alert alert-danger" *ngIf="!email.valid&&repassword.touched&&repassword.value!=password.value">Password not match</div>
 										<!-- EMAIL -->
 										<div class="form-group">
 											<div class="input-group">
-												<input class="form-control" required ngModel #email="ngModel" email ng-pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" (change)="log(email)" name="email" id="email" placeholder="Email"  type="text" >
+												<input class="form-control" required ngModel #email="ngModel" email ng-pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"  name="email" id="email" placeholder="Email"  type="text" >
 											</div>
                     					</div>
                     					<div class="alert alert-danger" *ngIf="!email.valid&&email.touched">Please Enter Your Email!</div>

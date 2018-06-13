@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   this.userService.registerUser(username,password,email,fullname).subscribe((data:any)=>{
     console.log(data);
     alert("Dang ki thanh cong");
-    this.router.navigate['/login'];  
+    this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
     console.log(err);
   }
