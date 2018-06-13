@@ -19,12 +19,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let email of emails ">
-            <td width="10%" >{{email.id|json}}</td>
-            <td width="20%" >{{email.subject|json| slice:0:20}}</td>
-            <td width="20%" >{{email.name|json| slice:0:20}}</td>
-            <td width="20%">{{email.email|json| slice:0:20}}</td>
-            <td width="20%" >{{email.messages|json| slice:0:20}}</td>
-            <td width="10%" ><button (click)="deleteEmail(email.id)" class="btn btn-outline-success btn-icon"><i class="ion-trash-a" ></i></button></td>
+            <td style="color: black " width="10%" >{{email.id|json}}</td>
+            <td style="color: black" width="20%" >{{email.subject|json| slice:0:20}}</td>
+            <td style="color: black" width="20%" >{{email.name|json| slice:0:20}}</td>
+            <td style="color: black" width="20%">{{email.email|json| slice:0:20}}</td>
+            <td style="color: black" width="20%" >{{email.messages|json| slice:0:20}}</td>
+            <td style="color: black" width="10%" ><button (click)="deleteEmail(email.id)" class="btn btn-outline-success btn-icon"><i class="ion-trash-a" ></i></button></td>
           </tr>
          
         </tbody>
