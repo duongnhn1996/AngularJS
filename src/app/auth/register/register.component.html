@@ -21,38 +21,35 @@
 								</div>
 								<div class="row">
 									<div class="col-sm-12 col-md-10  col-md-offset-1 ">
+										<!-- USERNAME -->
 										<div class="form-group">
 											<div class="input-group">
 												<input required  ngModel #username="ngModel"  name="username" id="username" type="text" class="form-control" placeholder="Username"  type="text" autofocus>
                       						</div>
 										</div>
 										<div class="alert alert-danger" *ngIf="!username.valid&&username.touched">Please Enter Username!</div>
-										
-
+										<!-- PASSWORD -->
 										<div class="form-group">
 											<div class="input-group">
 												<input class="form-control" required ngModel #password="ngModel" name="password" id="password" placeholder="Password"  type="password" >
 											</div>
                     					</div>
 										<div class="alert alert-danger" *ngIf="!password.valid&&password.touched">Please Enter Password!</div>
-										
+										<!-- CONFIRM PASSWORD -->
 										<div class="form-group">
 											<div class="input-group">
-												<input class="form-control" required ngModel #repassword="ngModel" name="repassword" id="repassword"  match="myForm.password" match-caseless="true" placeholder="Re-Password"  type="password" >
+												<input class="form-control" required  pattern="password" ngModel #repassword="ngModel" name="repassword" id="repassword"   placeholder="Re-Password"  type="password" >
 											</div>
                     					</div>
-										<div class="alert alert-danger" *ngIf="!repassword.valid&&repassword.touched">Please Enter Password Again!</div>
-										
-										
-
-
+										<div class="alert alert-danger" *ngIf="repassword.touched&&repassword.value!=password.value">Password not match</div>
+										<!-- EMAIL -->
 										<div class="form-group">
 											<div class="input-group">
 												<input class="form-control" required ngModel #email="ngModel" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" (change)="log(email)" name="email" id="email" placeholder="Email"  type="text" >
 											</div>
                     					</div>
                     					<div class="alert alert-danger" *ngIf="!email.valid&&email.touched">Please Enter Your Email!</div>
-
+										<!-- FULL NAME -->
 										<div class="form-group">
 											<div class="input-group">
 												<input required  ngModel #fullname="ngModel"  name="fullname" id="fulname" type="text" class="form-control" placeholder="Full name"  type="text" autofocus>

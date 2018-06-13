@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './../../user.service';
+import { Directive, forwardRef, Attribute,OnChanges, SimpleChanges,Input } from '@angular/core';
+import { NG_VALIDATORS,Validator,Validators,AbstractControl,ValidatorFn } from '@angular/forms';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
@@ -21,5 +23,6 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit() {
   }
+  
 
 }
