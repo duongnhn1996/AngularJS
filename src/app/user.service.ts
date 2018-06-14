@@ -31,12 +31,16 @@ export class UsersService {
   // }
   userAuthentication(userName,password){
     const myheader = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Max-Age' : '1728000',
       "Authorization": "Basic " + btoa(userName + ":" + password)
     });
 
     let body: HttpParams = new HttpParams(); // require
-
+    console.log(myheader);
     return this.http.post(this.ROOT_URL+"/auth/token",body,{headers: myheader});
   }
 
@@ -52,14 +56,8 @@ export class UsersService {
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const body= {
-  
-      'username': username,
-      'password': password,
-      'fullname': fullname,
-      'email': email
-    }
-    return this.http.post(this.ROOT_URL + "/user", body, {headers:myheader});
+    const body= {password,username,fullname,email}
+    return this.http.post(`${this.ROOT_URL}/user`, body, {headers:myheader});
   }
 
 }
