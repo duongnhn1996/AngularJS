@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ListmailService {
-  readonly ROOT_URL = "http://localhost:52044/api/EMAILS"
+  readonly ROOT_URL = "http://localhost:52044/api"
   emails: Observable<any>;
   constructor(private http: HttpClient) { }
 
@@ -25,12 +25,12 @@ export class ListmailService {
       messages: Messages,
       email: Email
     }
-    //  console.log(data);
-    return this.http.post<any>(this.ROOT_URL, data).subscribe(value => { this.emails = value; alert("Your Mail is Sending...!") });
+    
+    return this.http.post<any>(`${this.ROOT_URL}/EMAILS`, data).subscribe(value => { this.emails = value; alert("Your Mail is Sending...!") });
   }
   deleteEmail(id:number) {
     if (confirm('Are you sure you want to delete this?')) {
-      return this.http.delete<any>(this.ROOT_URL+"/"+id,httpOptions).pipe(
+      return this.http.delete<any>(`${this.ROOT_URL}/EMAILS/id`,httpOptions).pipe(
         tap(value => value),
         catchError(error => of([])
         ));
@@ -38,9 +38,9 @@ export class ListmailService {
       
   }
 
-  getData(): Observable<any>{
+  getData(username): Observable<any>{
     // return this.http.get<any>(this.ROOT_URL).subscribe(value => {this.emails=value});
-    return this.http.get<any>(this.ROOT_URL).pipe(
+    return this.http.get<any>(`${this.ROOT_URL}/getmail/${username}`).pipe(
       tap(value => value),
       catchError(error => of([])
       )

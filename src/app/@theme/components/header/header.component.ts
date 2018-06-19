@@ -36,11 +36,9 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   ngOnInit() {
-    // this.userService.getUsers()
-    //   .subscribe((users: any) => this.user = users.nick);
-    this.usersService.getUserInfo().subscribe((data: any)=>{
-      this.userInfo=data;
-    })
+   
+    this.userInfo=this.usersService.getUserInfo();
+
   }
 
   toggleSidebar(): boolean {

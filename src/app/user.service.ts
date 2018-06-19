@@ -6,6 +6,7 @@ import { ListMail } from './@core/data/listmail';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap, filter } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import * as jwt_decode from "jwt-decode";
 import { NbResetPasswordComponent } from '@nebular/auth';
 import { URLSearchParams } from '@angular/http';
 import { IListUser } from './@core/data/listuser';
@@ -39,17 +40,24 @@ export class UsersService {
       "Authorization": "Basic " + btoa(userName + ":" + password)
     });
 
-    let body: HttpParams = new HttpParams(); // require
-    console.log(myheader);
+    let body: HttpParams = new HttpParams(); 
+   
     return this.http.post(this.ROOT_URL+"/auth/token",body,{headers: myheader});
   }
-
+  getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
+  }
+  
   getUserInfo(){
-   return this.http.get(this.ROOT_URL+"/getUserInfo",{
-      headers: new HttpHeaders({
-        'Authorization':'Bearer '+ localStorage.getItem('userToken')
-      })
-    });
+      var token =localStorage.getItem('userToken');
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
   }
 
   registerUser(username,password,email,fullname){

@@ -26,7 +26,6 @@ export class FormInputsComponent implements OnInit{
 
   // }
   log(x) {console.log(x);}
-  readonly ROOT_URL="http://localhost:3000/email"
   emails: Observable<any>;
   constructor(private listmailService: ListmailService){
     
@@ -37,19 +36,5 @@ export class FormInputsComponent implements OnInit{
   ngOnInit(){
     
   }
-  // constructor(private http: HttpClient){
-
-  // }
-  // createMail(Email: string,Messages:string,Name: string,Subject: string){
-  //   const data: ListMail = {
-  //     id: null,
-  //     name: Name,
-  //     subject: Subject,
-  //     messages: Messages,
-  //     email: Email
-  //   }
-  //   //  console.log(data);
-  //    this.http.post<any>(this.ROOT_URL,data).subscribe(value => {this.newEmail=value;alert("Your Mail is Sending...!")});
-  // }
  
 }

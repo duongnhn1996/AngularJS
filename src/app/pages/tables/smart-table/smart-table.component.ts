@@ -1,3 +1,5 @@
+import { UserService } from './../../../@core/data/users.service';
+import { UsersService } from './../../../user.service';
 import { ListmailService } from './../../../listmail.service';
 import { Observable } from 'rxjs';
 import { ListMail, IListMail } from './../../../@core/data/listmail';
@@ -27,7 +29,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 export class SmartTableComponent implements OnInit {
-
+  username:any;
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -65,13 +67,13 @@ export class SmartTableComponent implements OnInit {
     },
   };
   emails: Observable<any>;
-  constructor(private service: ListmailService,private http: HttpClient) {
+  constructor(private service: ListmailService,private http: HttpClient,private UsersService: UsersService) {
 
    
   }
   ngOnInit(){
-
-    this.service.getData().subscribe(value => {this.emails=value});
+    this.username = this.UsersService.getUserInfo();
+    this.service.getData(this.username.username).subscribe(value => {this.emails=value});
   }
   deleteEmail(id:number): void{
     this.service.deleteEmail(id).subscribe(value => {

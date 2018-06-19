@@ -18,12 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UsersService,private router: Router) { }
   checkLogin(username:string,password:string){
     this.userService.userAuthentication(username,password).subscribe((data:any)=>{
-      localStorage.setItem('userToken',data.access_token);
-      console.log(data);
+      localStorage.setItem('userToken',data);
       this.router.navigate(['/pages']);
     },(err: HttpErrorResponse)=>{
       this.isLoginError=true;
-      console.log(err);
     }
     );
     // if(username==="admin"&&password==="admin"){
