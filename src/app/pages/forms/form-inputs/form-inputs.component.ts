@@ -1,8 +1,10 @@
+import { UserService } from './../../../@core/data/users.service';
+import { UsersService } from './../../../user.service';
 import { ListmailService } from './../../../listmail.service';
 import { ListMail } from './../../../@core/data/listmail';
 import { Observable, Subject } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SubjectSubscriber } from 'rxjs/internal/Subject';
 
 // import 'rxjs/add/operator/map';
@@ -25,13 +27,22 @@ export class FormInputsComponent implements OnInit{
   //   message=message.trim();
 
   // }
-  log(x) {console.log(x);}
+
   emails: Observable<any>;
-  constructor(private listmailService: ListmailService){
+  userid: any;
+  constructor(private listmailService: ListmailService,private UsersService: UsersService){
     
   }
-  creatMailFromService(Email: string, Messages: string, Name: string, Subject: string): void{
-    this.listmailService.createMail(Email, Messages, Name, Subject);
+  creatMailFromService(Email: string, Messages: string, Subject: string): void{
+    this.userid = this.UsersService.getUserInfo();
+    this.listmailService.createMail( Subject, Messages , Email, this.userid.id).subscribe((data:any)=>{
+      console.log(data);
+      alert("Gui thanh cong");
+    
+    },(err: HttpErrorResponse)=>{
+      console.log(err);
+    }
+    );
   }
   ngOnInit(){
     
