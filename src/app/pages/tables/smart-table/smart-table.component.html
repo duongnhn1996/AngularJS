@@ -11,18 +11,18 @@
           <tr  class="tableborder">
             <th width="10%" class="item">ID</th>
             <th width="20%" class="item" >Subject</th>
-            <th width="20%" class="item" >Name</th>
-            <th width="20%" class="item" >Email</th>
+            <th width="20%" class="item" >Send By</th>
+            <th width="20%" class="item" >Mail To</th>
             <th width="20%" class="item" >Messages</th>
             <th width="10%" class="item" >Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let email of emails ">
-            <td style="color: black " width="10%" >{{email.id|json}}</td>
+          <tr *ngFor="let email of emails;let myIndex = index ">
+            <td style="color: black " width="10%" >{{myIndex+1}}</td>
             <td style="color: black" width="20%" >{{email.subject|json| slice:0:20}}</td>
             <td style="color: black" width="20%" >{{email.name|json| slice:0:20}}</td>
-            <td style="color: black" width="20%">{{email.email|json| slice:0:20}}</td>
+            <td style="color: black" width="20%">{{email.mailTo|json| slice:0:20}}</td>
             <td style="color: black" width="20%" >{{email.messages|json| slice:0:20}}</td>
             <td style="color: black" width="10%" ><button (click)="deleteEmail(email.id)" class="btn btn-outline-success btn-icon"><i class="ion-trash-a" ></i></button></td>
           </tr>

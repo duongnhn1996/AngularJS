@@ -3,14 +3,14 @@ export interface ListMail {
     subject: string;
     name: string;
     messages: string;
-    email: string;
+    mailto: string;
 }
 export interface IListMail {
     id: number;
     subject: string;
     name: string;
     messages: string;
-    email: string;
+    mailto: string;
 }
 export function CreateEmail(data): IListMail {
     return {
@@ -18,6 +18,6 @@ export function CreateEmail(data): IListMail {
         subject: data.subject,
         name: data.name,
         messages: data.messages,
-        email: data.email
+        mailto: data.mailto
     }
 }

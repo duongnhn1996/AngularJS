@@ -19,18 +19,17 @@ export class ListmailService {
   emails: Observable<any>;
   constructor(private http: HttpClient) { }
 
-  createMail(Email: string, Messages: String,Subject:string, UserID: string) {
+  createMail(mailto: string, Messages: String,Subject:string, UserID: string) {
 
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Headers': '*',
-      // 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-      // 'Access-Control-Max-Age' : '1728000',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
     });
-    const body= {Subject,Messages,Email,UserID}
-    return this.http.post(`${this.ROOT_URL}/emails`, body, {headers:myheader});
-    // return this.http.post<any>(`${this.ROOT_URL}/EMAILS`,{Subject,Email,Messages,UserID},{headers: myheader} ).subscribe(value => { this.emails = value; alert("Your Mail is Sending...!");console.log(value); });
+    // const body= {Subject,Messages,Email,UserID}
+    // return this.http.post(`${this.ROOT_URL}/emails`, body, {headers:myheader});
+    return this.http.post<any>(`${this.ROOT_URL}/savemail`,{Subject,mailto,Messages,UserID},{headers: myheader} ).subscribe(value => { this.emails = value; alert("Your Mail is Sending...!");console.log(value); });
   
  }
   
