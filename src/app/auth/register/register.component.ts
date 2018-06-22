@@ -6,6 +6,7 @@ import { Directive, forwardRef, Attribute,OnChanges, SimpleChanges,Input } from 
 import { NG_VALIDATORS,Validator,Validators,AbstractControl,ValidatorFn } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IListUser } from '../../@core/data/listuser';
+import { Alert } from 'selenium-webdriver';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
@@ -19,11 +20,11 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UsersService,private router:Router) { }
   registerUser(username,password,email,fullname){
   this.userService.registerUser(username,password,email,fullname).subscribe((data:any)=>{
-    console.log(data);
     alert("Dang ki thanh cong");
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
-    console.log(err);
+    alert(err.statusText);
+    console.log(err.statusText);
   }
   );
 
