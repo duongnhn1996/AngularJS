@@ -1,3 +1,3 @@
-# AngularJS
-- Demo Project  - test code, learning AngularJS
-- Email Project - Final project
+# Email Web
+- Front-end :  Angular 5 
+- Back-end: ASP.NET CORE API ( https://github.com/duongnhn1996/BackEnd-DonetCore-API )
