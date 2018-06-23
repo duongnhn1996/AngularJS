@@ -16,14 +16,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  errorMessages : string;
   constructor(private userService: UsersService,private router:Router) { }
   registerUser(username,password,email,fullname){
   this.userService.registerUser(username,password,email,fullname).subscribe((data:any)=>{
     alert("Dang ki thanh cong");
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
-    alert(err.statusText);
+    this.errorMessages = err.error
     console.log(err.statusText);
   }
   );
