@@ -1,3 +1,6 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { MyHttpInterceptor } from './../my-http-interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
@@ -14,12 +17,23 @@ const PAGES_COMPONENTS = [
   imports: [
     PagesRoutingModule,
     ThemeModule,
+    HttpClientModule,
     DashboardModule,
 
   ],
+  
   declarations: [
     ...PAGES_COMPONENTS,
   ],
+   providers: [
+  
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: MyHttpInterceptor, 
+      multi: true
+    }
+    
+  ]
 })
 export class PagesModule {
 }
