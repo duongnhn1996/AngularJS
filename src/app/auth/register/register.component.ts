@@ -18,8 +18,8 @@ export class RegisterComponent implements OnInit {
 
   errorMessages : string;
   constructor(private userService: UsersService,private router:Router) { }
-  registerUser(username,password,email,fullname){
-  this.userService.registerUser(username,password,email,fullname).subscribe((data:any)=>{
+  registerUser(username,password,email,fullname,recaptcha){
+  this.userService.registerUser(username,password,email,fullname,recaptcha).subscribe((data:any)=>{
     alert("Dang ki thanh cong");
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
