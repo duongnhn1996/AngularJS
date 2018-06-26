@@ -58,10 +58,11 @@
                       						</div>
 										</div>
 										<div class="alert alert-danger" *ngIf="!fullname.valid&&fullname.touched">Please Enter Full name!</div>
-										<div class="g-recaptcha" ngModel #recaptcha="ngModel" name="recaptcha" id="recaptcha" data-sitekey="6LedxGAUAAAAAD2hGt5MHyxvBdfJpXGVXIQflurG"></div>
-										<div class="alert alert-danger" *ngIf="!recaptcha.value&&recaptcha.touched">Please Check Captcha!</div>
+										<re-captcha required (resolved)="resolved($event)" siteKey="6LedxGAUAAAAAD2hGt5MHyxvBdfJpXGVXIQflurG"></re-captcha>
+<!-- 										
+										<div class="alert alert-danger" *ngIf="!resolved.value&&recaptcha.touched">Please Check Captcha!</div> -->
 										<div class="form-group">
-											<input type="submit" [disabled]="!myForm.form.valid" (click)="registerUser(username.value,password.value,email.value,fullname.value,recaptcha.value)" class="btn btn-lg btn-primary btn-block" value="Register">
+											<input type="submit" [disabled]="!myForm.form.valid" (click)="registerUser(username.value,password.value,email.value,fullname.value)" class="btn btn-lg btn-primary btn-block" value="Register">
 										</div>
 									</div>
 								</div>

@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [AppComponent, AuthComponent, LoginComponent, RegisterComponent],
@@ -27,7 +28,7 @@ import { RegisterComponent } from './auth/register/register.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    RecaptchaModule.forRoot(),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

@@ -60,11 +60,11 @@ export class UsersService {
       return JSON.parse(window.atob(base64));
   }
 
-  registerUser(username,password,email,fullname,recaptcha){
+  registerUser(username,password,email,fullname){
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const body= {password,username,fullname,email,recaptcha}
+    const body= {password,username,fullname,email}
     return this.http.post(`${this.ROOT_URL}/user`, body, {headers:myheader});
   }
 
