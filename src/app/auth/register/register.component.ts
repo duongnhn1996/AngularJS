@@ -17,13 +17,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
    
   }
+  recaptcha:string
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response ${captchaResponse}:`);
+    this.recaptcha=  captchaResponse;
   }
   errorMessages : string;
   constructor(private userService: UsersService,private router:Router) { }
   registerUser(username,password,email,fullname){
-  this.userService.registerUser(username,password,email,fullname).subscribe((data:any)=>{
+  this.userService.registerUser(username,password,email,fullname,this.recaptcha).subscribe((data:any)=>{
     alert("Dang ki thanh cong");
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
