@@ -18,7 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsersService {
-  readonly ROOT_URL = "http://demoemailweb.azurewebsites.net/api"
+  readonly ROOT_URL = "https://demoemailweb.azurewebsites.net/api"
   Users: Observable<any>;
   constructor(private http: HttpClient) { }
   // createUser(Username: string, Password: string) {
