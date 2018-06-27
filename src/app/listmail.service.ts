@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ListmailService {
-  readonly ROOT_URL = "http://localhost:52044/api"
+  readonly ROOT_URL = "http://demoemailweb.azurewebsites.net/api"
   
 
   emails: Observable<any>;
