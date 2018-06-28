@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
   myForm: FormGroup;
+  @BlockUI() blockUI : NgBlockUI;
   ngOnInit() {
    
   }
@@ -21,11 +22,13 @@ export class RegisterComponent implements OnInit {
   errorMessages : string;
   constructor(private userService: UsersService,private router:Router) { }
   registerUser(username,password,email,fullname){
+    this.blockUI.start("Please  wait....");
   this.userService.registerUser(username,password,email,fullname,this.recaptcha).subscribe(() => {
-    alert("Dang ki thanh cong");
+    this.blockUI.stop();
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{
     this.errorMessages = err.error
+    this.blockUI.stop();
     console.log(err.statusText);
   }
   );
