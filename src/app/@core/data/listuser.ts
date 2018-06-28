@@ -5,6 +5,11 @@ export interface IListUser {
     role: number;
     fullname: string;
     email:string;
+    recaptcha:string
+}
+export interface IUserLogin{
+    username: string;
+    password: string;
 }
 
 export function CreateUser(data): IListUser {
@@ -14,6 +19,8 @@ export function CreateUser(data): IListUser {
         password: data.password,
         role: data.role,
         fullname: data.fullname,
-        email: data.email
+        email: data.email,
+        recaptcha: data.recaptcha
+
     }
 }

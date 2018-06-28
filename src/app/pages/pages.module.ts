@@ -1,3 +1,4 @@
+import { BlockUIModule } from 'ng-block-ui';
 import { BrowserModule } from '@angular/platform-browser';
 import { MyHttpInterceptor } from './../my-http-interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -17,6 +18,7 @@ const PAGES_COMPONENTS = [
   imports: [
     PagesRoutingModule,
     ThemeModule,
+    BlockUIModule.forRoot(),
     HttpClientModule,
     DashboardModule,
 

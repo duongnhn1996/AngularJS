@@ -1,3 +1,4 @@
+import { BlockUIModule } from 'ng-block-ui';
 import { ListmailService } from './../../listmail.service';
 import { NgModule } from '@angular/core';
 
@@ -8,6 +9,7 @@ import { FormsRoutingModule, routedComponents } from './forms-routing.module';
   imports: [
     ThemeModule,
     FormsRoutingModule,
+    BlockUIModule.forRoot()
   ],
   declarations: [
     ...routedComponents,

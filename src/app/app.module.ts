@@ -9,9 +9,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
-
+import { BlockUIModule } from 'ng-block-ui';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -29,6 +29,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     HttpClientModule,
     AppRoutingModule,
     RecaptchaModule.forRoot(),
+    BlockUIModule.forRoot(),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

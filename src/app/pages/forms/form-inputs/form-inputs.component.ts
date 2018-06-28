@@ -1,3 +1,4 @@
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { UserService } from './../../../@core/data/users.service';
 import { UsersService } from './../../../user.service';
 import { ListmailService } from './../../../listmail.service';
@@ -16,36 +17,25 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./form-inputs.component.scss'],
   templateUrl: './form-inputs.component.html',
 })
-export class FormInputsComponent implements OnInit{
-  starRate = 2;
-  heartRate = 4;
-  // AddMail(subject:string,name:string,mail:string,message:string){
-  //   subject=subject.trim();
-  //   name=name.trim();
-  //   mail=mail.trim();
-  //   message=message.trim();
-
-  // }
-
+export class FormInputsComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   emails: Observable<any>;
   userid: any;
-  constructor(private listmailService: ListmailService,private UsersService: UsersService){
-    
+  constructor(private listmailService: ListmailService, private UsersService: UsersService) {
+
   }
-  creatMailFromService(Mailto: string, Messages: string, Subject: string): void{
+  private creatMailFromService(Mailto: string, Messages: string, Subject: string): void {
+    this.blockUI.start('Loading...');
     this.userid = this.UsersService.getUserInfo();
-    this.listmailService.createMail( Mailto, Messages,Subject , this.userid.id);
-    // .subscribe((data:any)=>{
-    //   console.log(data);
-    //   alert("Gui thanh cong");
-    
-    // },(err: HttpErrorResponse)=>{
-    //   console.log(err);
-    // }
-    // );
-  }
-  ngOnInit(){
+    this.listmailService.createMail(Mailto, Messages, Subject, this.userid.id)
+      .subscribe(
+        value => { this.emails = value; 
+        this.blockUI.stop();
+      });
     
   }
- 
+  ngOnInit() {
+
+  }
+
 }

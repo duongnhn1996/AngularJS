@@ -1,48 +1,32 @@
-import { of } from 'rxjs/observable/of';
-import { Component } from '@angular/core';
+import { Appsetting } from './@core/data/config';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/filter';
-import { ListMail } from './@core/data/listmail';
 import { Injectable } from '@angular/core';
-import { catchError, map, tap, filter } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
-import { NbResetPasswordComponent } from '@nebular/auth';
-import { URLSearchParams } from '@angular/http';
-import { IListUser } from './@core/data/listuser';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { IUserLogin, IListUser, CreateUser } from './@core/data/listuser';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
-  readonly ROOT_URL = "https://demoemailweb.azurewebsites.net/api"
-  Users: Observable<any>;
-  constructor(private http: HttpClient) { }
-  // createUser(Username: string, Password: string) {
-  //   const data: IListUser = {
-  //     id: null,
-  //     username: Username,
-  //     password: Password
-  //   }
 
-  //   return this.http.post<any>(this.ROOT_URL, data);
-  // }
-  userAuthentication(userName,password){
+export class UsersService {
+
+  constructor(private http: HttpClient) { }
+  
+  userAuthentication(username,password): Observable<IUserLogin[]> {
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
       'Access-Control-Max-Age' : '1728000',
-      "Authorization": "Basic " + btoa(userName + ":" + password)
+      "Authorization": "Basic " + btoa(username + ":" + password)
     });
 
     let body: HttpParams = new HttpParams(); 
-   
-    return this.http.post(this.ROOT_URL+"/auth/token",body,{headers: myheader});
+    return this.http.post<IUserLogin[]>(`${Appsetting.ROOT_URL}/auth/token`,body,{headers: myheader});
+    // return this.http.post<IUserLogin[]>(this.ROOT_URL+"/auth/token",body,{headers: myheader});
   }
   getDecodedAccessToken(token: string): any {
     try{
@@ -60,12 +44,20 @@ export class UsersService {
       return JSON.parse(window.atob(base64));
   }
 
-  registerUser(username,password,email,fullname,recaptcha){
+  registerUser(username,password,email,fullname,recaptcha): Observable<IListUser[]> {
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const body= {password,username,fullname,email,recaptcha}
-    return this.http.post(`${this.ROOT_URL}/user`, body, {headers:myheader});
+    var body = CreateUser({
+      id:null,
+      username:username,
+      password:password,
+      role:null,
+      fullname:fullname,
+      email:email,
+      recaptcha:recaptcha
+    });
+    return this.http.post<IListUser[]>(`${Appsetting.ROOT_URL}/user`, body, {headers:myheader});
   }
 
 }

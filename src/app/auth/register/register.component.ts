@@ -1,12 +1,9 @@
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './../../user.service';
-import { Directive, forwardRef, Attribute,OnChanges, SimpleChanges,Input } from '@angular/core';
-import { NG_VALIDATORS,Validator,Validators,AbstractControl,ValidatorFn, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IListUser } from '../../@core/data/listuser';
-import { Alert } from 'selenium-webdriver';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
@@ -24,7 +21,7 @@ export class RegisterComponent implements OnInit {
   errorMessages : string;
   constructor(private userService: UsersService,private router:Router) { }
   registerUser(username,password,email,fullname){
-  this.userService.registerUser(username,password,email,fullname,this.recaptcha).subscribe((data:any)=>{
+  this.userService.registerUser(username,password,email,fullname,this.recaptcha).subscribe(() => {
     alert("Dang ki thanh cong");
     this.router.navigate(['/login']);
   },(err: HttpErrorResponse)=>{

@@ -28,7 +28,7 @@ export class ListmailService {
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
     });
 
-    return this.http.post<any>(`${this.ROOT_URL}/savemail`,{Subject,mailto,Messages,UserID},{headers: myheader} ).subscribe(value => { this.emails = value; alert("Your Mail is Sending...!");console.log(value); });
+    return this.http.post<any>(`${this.ROOT_URL}/savemail`,{Subject,mailto,Messages,UserID},{headers: myheader} );
   
  }
   
