@@ -48,13 +48,7 @@ export class UsersService {
     const myheader = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    var body = CreateUser({
-      Username:username,
-      Password:password,
-      Fullname:fullname,
-      Email:email,
-      Recaptcha:recaptcha
-    });
+    var body = CreateUser({username,password,email,fullname,recaptcha});
     return this.http.post<IListUser[]>(`${Appsetting.ROOT_URL}/user`, body, {headers:myheader});
   }
 
