@@ -49,13 +49,11 @@ export class UsersService {
       'Content-Type': 'application/json',
     });
     var body = CreateUser({
-      id:null,
-      username:username,
-      password:password,
-      role:null,
-      fullname:fullname,
-      email:email,
-      recaptcha:recaptcha
+      Username:username,
+      Password:password,
+      Fullname:fullname,
+      Email:email,
+      Recaptcha:recaptcha
     });
     return this.http.post<IListUser[]>(`${Appsetting.ROOT_URL}/user`, body, {headers:myheader});
   }

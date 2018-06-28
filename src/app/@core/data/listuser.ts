@@ -14,10 +14,10 @@ export interface IUserLogin{
 
 export function CreateUser(data): IListUser {
     return {
-        id: data.id,
+        id: null,
         username: data.username,
         password: data.password,
-        role: data.role,
+        role: null,
         fullname: data.fullname,
         email: data.email,
         recaptcha: data.recaptcha
