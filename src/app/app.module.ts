@@ -33,6 +33,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -1,30 +1,15 @@
-import { UserService } from './../../../@core/data/users.service';
+import { Notify } from './../../../@core/data/config';
+import { ToasterConfig, ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { UsersService } from './../../../user.service';
 import { ListmailService } from './../../../listmail.service';
-import { Observable } from 'rxjs';
-import { ListMail, IListMail } from './../../../@core/data/listmail';
+import { IListMail } from './../../../@core/data/listmail';
 import { Component, OnInit } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
+import 'style-loader!angular2-toaster/toaster.css';
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './smart-table.component.html',
-  styles: [`
-    nb-card {
-      transform: translate3d(0, 0, 0);
-      color:white;
-    }
-    .tableborder{
-      border-top: 0px
-      border-bottom: 1px solid #2f296a;
-     
-    }
-    .item{
-     
-      background:#0087db;
-    }
-  `],
+  styles: ['./smart-table.component.scss'],
 })
 
 
@@ -66,20 +51,51 @@ export class SmartTableComponent implements OnInit {
      
     },
   };
-  emails: Observable<any>;
-  constructor(private service: ListmailService,private http: HttpClient,private UsersService: UsersService) {
+  emails: IListMail[];
 
-   
+
+  config = new ToasterConfig({
+    positionClass: Notify.position,
+    timeout: Notify.timeout,
+    newestOnTop: Notify.isNewestOnTop,
+    tapToDismiss: Notify.isHideOnClick,
+    preventDuplicates: Notify.isDuplicatesPrevented,
+    animation: Notify.animationType,
+    limit: Notify.toastsLimit,
+  });
+  public showToast(type: string, title: string, body: string) {
+      
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: Notify.timeout,
+      showCloseButton: Notify.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+    this.toasterService.popAsync(toast);
   }
+  constructor(private service: ListmailService,private UsersService: UsersService,private toasterService: ToasterService) {
+
+   }
+   
+   
+   
+   
   ngOnInit(){
     this.username = this.UsersService.getUserInfo();
+    
     this.service.getData(this.username.username).subscribe(value => {this.emails=value});
   }
   deleteEmail(id:number): void{
-    this.service.deleteEmail(id).subscribe(value => {
-      this.emails= this.emails.filter(filterID => filterID.id !== id); // update when delete
-        alert("Deleted!")
-      });;
+    
+    this.service.deleteEmail(id).subscribe(() => {
+      this.emails = this.emails.filter(filterID => filterID.id !== id); // update when delete
+      this.showToast(Notify.sussces, Notify.Done, Notify.emailDeleted);
+    });;
+  }
+  openToast(){
+    
   }
  
 

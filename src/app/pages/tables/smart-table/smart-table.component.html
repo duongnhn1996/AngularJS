@@ -1,14 +1,14 @@
+
 <nb-card>
   <nb-card-header>
     Your Request
   </nb-card-header>
 
   <nb-card-body>
-    <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table> -->
+    <toaster-container [toasterconfig]="config"></toaster-container>
     <table class="table table-bordered">
         <thead class="text-center">
-          <tr  class="tableborder">
+          <tr  class="alert alert-primary">
             <th width="10%" class="item">ID</th>
             <th width="20%" class="item" >Subject</th>
             <th width="20%" class="item" >Send By</th>

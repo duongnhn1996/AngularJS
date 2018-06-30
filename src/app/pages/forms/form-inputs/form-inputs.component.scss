@@ -7,7 +7,11 @@
   nb-card-body {
     overflow: visible;
   }
-
+  toaster-container /deep/ {
+    #toast-container .toast-close-button {
+      right: 0;
+    }
+  }
   .input-group {
     margin-bottom: 1rem;
   }

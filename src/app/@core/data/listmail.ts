@@ -10,7 +10,13 @@ export interface IListMail {
     subject: string;
     name: string;
     messages: string;
-    mailto: string;
+    mailTo: string;
+}
+export interface IDELETE_MAIL{
+    id:number
+}
+export interface IGETMAIL{
+    username:string;
 }
 export function CreateEmail(data): IListMail {
     return {
@@ -18,6 +24,6 @@ export function CreateEmail(data): IListMail {
         subject: data.subject,
         name: data.name,
         messages: data.messages,
-        mailto: data.mailto
+        mailTo: data.mailto
     }
 }
