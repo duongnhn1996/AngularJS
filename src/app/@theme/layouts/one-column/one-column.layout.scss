@@ -22,7 +22,7 @@
 
         .scrollable {
           width: $sidebar-width;
-          padding: 1.25rem;
+          padding: 25px;
         }
       }
     }
@@ -46,7 +46,7 @@
   nb-sidebar.menu-sidebar {
 
     margin-top: nb-theme(sidebar-header-gap);
-
+    
     /deep/ .main-container {
       height:
         calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;

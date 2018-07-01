@@ -18,14 +18,18 @@
             <div class="input-group">
               <input required ngModel #email="ngModel" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" name="email"
                 id="email" type="email" placeholder="To" class="form-control" />
-            </div>
+               
+              </div>
             <div class="alert alert-danger" *ngIf="!email.valid&&email.touched">Email invalid!</div>
             <div class="input-group">
-              <textarea required ngModel #message="ngModel" name="message" id="message" rows="5" placeholder="Your messages" class="form-control"></textarea>
+              
+                <ckeditor required ngModel #message="ngModel"  name="message" id="message" placeholder="Your messages"></ckeditor>
+            
             </div>
             <div class="alert alert-danger" *ngIf="!message.valid&&message.touched">Please Enter Messages!</div>
-            <button (click)="creatMailFromService(email.value,message.value,subject.value)" _ngcontent-c16="" class="btn btn-hero-danger btn-demo col-md-6 offset-md-3"
+            <button (click)="createMailFromService(email.value,message.value,subject.value)" _ngcontent-c16="" class="btn btn-hero-danger btn-demo col-md-6 offset-md-3"
               ng-reflect-value="middle">Send</button>
+          
           </nb-card-body>
         </nb-card>
 

@@ -1,11 +1,11 @@
+import { Appsetting } from './@core/data/config';
 import { of } from 'rxjs/observable/of';
-import { Component } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/filter';
-import { ListMail, IListMail, IDELETE_MAIL, IGETMAIL } from './@core/data/listmail';
+import { IListMail, IDELETE_MAIL } from './@core/data/listmail';
 import { Injectable } from '@angular/core';
-import { catchError, map, tap, filter } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -13,8 +13,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ListmailService {
-  readonly ROOT_URL = "https://demoemailweb.azurewebsites.net/api"
-  
 
   emails: Observable<any>;
   constructor(private http: HttpClient) { }
@@ -28,24 +26,24 @@ export class ListmailService {
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
     });
 
-    return this.http.post<any>(`${this.ROOT_URL}/savemail`,{Subject,mailto,Messages,UserID},{headers: myheader} );
+    return this.http.post<any>(`${Appsetting.ROOT_URL}/savemail`,{Subject,mailto,Messages,UserID},{headers: myheader} );
   
  }
   
   deleteEmail(id:number): Observable<IDELETE_MAIL[]> {
     if (confirm('Are you sure you want to delete this?')) {
-      return this.http.delete<IDELETE_MAIL[]>(`${this.ROOT_URL}/EMAILS/${id}`,httpOptions).pipe(
+      return this.http.delete<IDELETE_MAIL[]>(`${Appsetting.ROOT_URL}/EMAILS/${id}`,httpOptions).pipe(
         tap(value => value),
-        catchError(error => of([])
+        catchError(() => of([])
         ));
     }
       
   }
 
   getData(username): Observable<IListMail[]>{
-    return this.http.get<IListMail[]>(`${this.ROOT_URL}/getmail/${username}`).pipe(
+    return this.http.get<IListMail[]>(`${Appsetting.ROOT_URL}/getmail/${username}`).pipe(
       tap(value => value),
-      catchError(error => of([])
+      catchError(() => of([])
       )
     );
   }
