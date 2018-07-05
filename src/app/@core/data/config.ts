@@ -1,5 +1,5 @@
 export class Appsetting {
-    public static ROOT_URL = "http://localhost:52044/api";
+    public static ROOT_URL = "https://demoemailweb.azurewebsites.net/api";
 }
 export class Notify {
     public static position = 'toast-top-right';
